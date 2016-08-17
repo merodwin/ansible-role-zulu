@@ -1,0 +1,5 @@
+---
+# defaults file for ansible-role-zulu
+
+zulu_version: "8.15.0.1"
+zulu_jdk_version: "8.0.92"

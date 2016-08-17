@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-role-zulu
+
+
+- name: check if installed
+  stat: "dest=/tmp/zulu{{zulu_version}}-jdk{{zulu_jdk_version}}-linux_amd64.deb"
+  register: zuluDep
+
+- block:
+  when: zuluDep.stat.exsits == False
+
+  - name: download zulu
+    get_url: "url=http://cdn.azul.com/zulu/bin/zulu{{zulu_version}}-jdk{{zulu_jdk_version}}-linux_amd64.deb dest=/tmp/zulu{{zulu_version}}-jdk{{zulu_jdk_version}}-linux_amd64.deb"
+
+  - name: install zulu
+    shell: "dpkg -i /tmp/zulu{{zulu_version}}-jdk{{zulu_jdk_version}}-linux_amd64.deb"
+
+
+
